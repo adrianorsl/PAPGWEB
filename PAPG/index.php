@@ -3,7 +3,7 @@
     $a1 = (isset($_POST['a1']) ? $_POST['a1'] : 0);
     $quantidade = (isset($_POST['quantidade']) ? $_POST['quantidade'] : 0);
     $razao = (isset($_POST['razao']) ? $_POST['razao'] : 0);
-    $tipo = (isset($_POST['papg']) ? $_POST['papg'] : "PA");
+    $tipo = (isset($_POST['papg']) ? $_POST['papg'] : "");
     $nome = (isset($_POST['nome']) ? $_POST['nome'] : "") .".json";
     
     
@@ -15,6 +15,7 @@
         }
         return $resultado;
     }
+
     function PG($n1, $razao, $quantidade){
         for ($x = 0; $x < $quantidade; $x++){
             $resultado[$x] = $n1 * $razao;
@@ -66,7 +67,7 @@
             for($i = 0; $i < count($resultado); $i++){
                 echo $resultado[$i]."<br>";
             }
-        }else {
+        }else if($tipo == "PG") {
             $resultado = PG($a1, $razao, $quantidade);
             $dados_json = json_encode($resultado);
             $fp = fopen($nome, "w");
@@ -77,14 +78,26 @@
             }
         }
     ?>
-    <h2>Ver Json</h2>
     <?php
-        $arquivo = file_get_contents($nome);
-        $json = json_decode($arquivo);
-        foreach ($json as $value) {
-            echo $value."<br>";
+        $menu = (isset($_POST['menu']) ? $_POST['menu'] : "");
+        
+    ?>
+    <form action="" method="post">
+    <select name="menu" id="menu">
+        <option value=""></option>
+        <option value="ver">Ver dados</option>
+        <fieldset>
+            <input type="submit" name="ok" id="ok" value="ok" >
+        </fieldset>
+    </select>
+    <?php
+        if ($menu == "ver"){
+            header('Location: verJson.php');
+            exit;
         }
     ?>
+        
+        
 
 </body>
 </html>
