@@ -40,10 +40,12 @@
 </head>
 <body>
     <form action="" method="post">
+    <h1> Menu </h1>
     <select name="menu" id="menu">
         <option value=""></option>
-        <option value="ver">Ver dados</option>
         <option value="checar">Checar dados</option>
+        <option value="ver">Ver dados</option>
+        <option value="grafico">Gráfico dos dados</option>
         <fieldset>
             <input type="submit" name="ok" id="ok" value="ok" >
         </fieldset>
@@ -52,14 +54,18 @@
         if ($menu == "ver"){
             header('Location: verJson.php');
             exit;
+        }else if ($menu == "grafico"){
+            header('Location: grafico.php');
+            exit;
         }else if ($menu == "checar"){
             header('Location: checar.php');
             exit;
         }else{
-            
+
         }
     ?>
     <form action="" method="post">
+    <h1></h1>
     <fieldset>
     <legend>Informe o nome do arquivo</legend>
         <label for="nome">Nome</label>

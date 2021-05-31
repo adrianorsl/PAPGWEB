@@ -1,12 +1,9 @@
 <!DOCTYPE html>
     <?php
         $nome2 = (isset($_POST['nome2']) ? $_POST['nome2'] : "") .".json";
-        $quantidade = 0;
-        $quantidade2 = -1 ;
-        $resultado = 0;
-        $valor = 0;
-        $valor2 = 0;
-        $aux2 = 0;
+        $menu = (isset($_POST['menu']) ? $_POST['menu'] : "");
+        
+
         function PA($n1, $razao, $quantidade){  
             for ($x = 0; $x < $quantidade; $x++){
                 if ($x == 0){
@@ -118,7 +115,33 @@
     <title>Checar</title>
 </head>
 <body>
+
     <form action="" method="post">
+    <h1> Menu </h1>
+    <select name="menu" id="menu">
+        <option value=""></option>
+        <option value="index">Inserir dados</option>
+        <option value="ver">Ver dados</option>
+        <option value="grafico">Gráfico dos dados</option>
+        <fieldset>
+            <input type="submit" name="ok" id="ok" value="ok" >
+        </fieldset>
+    </select>
+    <?php
+        if ($menu == "ver"){
+            header('Location: verJson.php');
+            exit;
+        }else if ($menu == "grafico"){
+            header('Location: grafico.php');
+            exit;
+        }else if ($menu == "index"){
+            header('Location: index.php');
+            exit;
+        }else{
+
+        }
+    ?>
+    <h1></h1>
     <legend>Informe o nome do arquivo</legend>
         <label for="nome">Nome</label>
         <input type="text" name="nome2" id="nome2" placeholder="Digite o nome" >
@@ -129,9 +152,9 @@
     <?php
         $arquivo = file_get_contents($nome2);
         $json = json_decode($arquivo);
-        $checar2 = PA(a1($json), razao($json), quantidade($json));
-        for($i = 0; $i < count($checar2); $i++){
-            echo $checar2[$i]."<br>";
+        
+        for($i = 0; $i < count($json); $i++){
+            echo $json[$i]."<br>";
         } 
         echo porcentagem($json)."% é uma ".progressao($json);
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
     $nome2 = (isset($_POST['nome2']) ? $_POST['nome2'] : "") .".json";
-
+    $menu = (isset($_POST['menu']) ? $_POST['menu'] : "");
 
     function a1($json){
         if(progressao($json) == "Pa"){
@@ -98,6 +98,31 @@
 </head>
 <body>
     <form action="" method="post">
+    <h1> Menu </h1>
+    <select name="menu" id="menu">
+        <option value=""></option>
+        <option value="index">Inserir dados</option>
+        <option value="grafico">Gráfico dos dados</option>
+        <option value="checar">Checar dados</option>
+        <fieldset>
+            <input type="submit" name="ok" id="ok" value="ok" >
+        </fieldset>
+    </select>
+    <?php
+        if ($menu == "grafico"){
+            header('Location: grafico.php');
+            exit;
+        }else if ($menu == "checar"){
+            header('Location: checar.php');
+            exit;
+        }else if ($menu == "index"){
+            header('Location: index.php');
+            exit;
+        }else{
+
+        }
+    ?>
+    <h1></h1>
     <h2>Ver Json</h2>
     <fieldset>
     <legend>Informe o nome do arquivo</legend>
