@@ -10,16 +10,24 @@
 
     function PA($n1, $razao, $quantidade){  
         for ($x = 0; $x < $quantidade; $x++){
-            $resultado[$x] = $n1 + $razao;
-            $n1 = $resultado[$x];
+            if ($x == 0){
+                $resultado[$x] = $n1;
+            }else{
+                $resultado[$x] = $n1 + $razao;
+                $n1 = $resultado[$x];
+            }
         }
         return $resultado;
     }
 
     function PG($n1, $razao, $quantidade){
         for ($x = 0; $x < $quantidade; $x++){
-            $resultado[$x] = $n1 * $razao;
-            $n1 = $resultado[$x];
+            if ($x == 0){
+                $resultado[$x] = $n1;
+            }else{
+                $resultado[$x] = $n1 * $razao;
+                $n1 = $resultado[$x];
+            } 
         }
         return $resultado;
     }

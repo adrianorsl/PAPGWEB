@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <?php
     $nome2 = (isset($_POST['nome2']) ? $_POST['nome2'] : "") .".json";
-    $quantidade2 = -1 ;
-    $media = 0;
-    $mediana = 0;
-    $valor = 0;
-    $valor2 = 0;
-    $progressao = "";
+
 
     function a1($json){
         if(progressao($json) == "Pa"){
@@ -115,13 +110,10 @@
     <?php
         $arquivo = file_get_contents($nome2);
         $json = json_decode($arquivo);
-        for ($x = 0; $x < count($json); $x++) {
-            echo $json[$x]."<br>";
-            $a1= $json[0];
-            $quantidade2 += 1;
-        }
         
-        
+        for($i = 0; $i < count($json); $i++){
+            echo $json[$i]."<br>";
+        } 
         echo "a1: ".a1($json)."<br>";
         echo "Quantidade: ".quantidade($json)."<br>";
         echo "Razão: ".razao($json)."<br>";

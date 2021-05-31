@@ -7,6 +7,29 @@
         $valor = 0;
         $valor2 = 0;
         $aux2 = 0;
+        function PA($n1, $razao, $quantidade){  
+            for ($x = 0; $x < $quantidade; $x++){
+                if ($x == 0){
+                    $resultado[$x] = $n1;
+                }else{
+                    $resultado[$x] = $n1 + $razao;
+                    $n1 = $resultado[$x];
+                }
+            }
+            return $resultado;
+        }
+    
+        function PG($n1, $razao, $quantidade){
+            for ($x = 0; $x < $quantidade; $x++){
+                if ($x == 0){
+                    $resultado[$x] = $n1;
+                }else{
+                    $resultado[$x] = $n1 * $razao;
+                    $n1 = $resultado[$x];
+                } 
+            }
+            return $resultado;
+        }
         function a1($json){
             if(progressao($json) == "Pa"){
             $a1 = $json[quantidade($json) - 1] - (quantidade($json) - 1) * razao($json);
@@ -66,6 +89,26 @@
             }
             return $progressao;  
         }
+        function porcentagem($json){
+            $valor = 0.0;
+            if(progressao($json) == "Pa"){
+                $checar = PA(a1($json), razao($json), quantidade($json));
+                for($x = 0; $x < quantidade($checar); $x++){
+                    if($checar[$x] == $json[$x]){
+                        $valor = $valor + 1;
+                    }
+                } 
+            }else{
+                $checar = PG(a1($json), razao($json), quantidade($json));
+                for($x = 0; $x < quantidade($checar); $x++){
+                    if($checar[$x] == $json[$x]){
+                        $valor = $valor + 1;
+                    }
+                } 
+            }
+            return ($valor / quantidade($checar)) * 100;
+        }
+        
 
     ?>
 <html>
@@ -86,7 +129,12 @@
     <?php
         $arquivo = file_get_contents($nome2);
         $json = json_decode($arquivo);
-        
+        $checar2 = PA(a1($json), razao($json), quantidade($json));
+        for($i = 0; $i < count($checar2); $i++){
+            echo $checar2[$i]."<br>";
+        } 
+        echo porcentagem($json)."% é uma ".progressao($json);
+
     ?>
 </body>
 </html>
