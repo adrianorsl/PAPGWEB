@@ -5,7 +5,7 @@
     $razao = (isset($_POST['razao']) ? $_POST['razao'] : 0);
     $tipo = (isset($_POST['papg']) ? $_POST['papg'] : "");
     $nome = (isset($_POST['nome']) ? $_POST['nome'] : "") .".json";
-    
+    $menu = (isset($_POST['menu']) ? $_POST['menu'] : "");;
     
 
     function PA($n1, $razao, $quantidade){  
@@ -31,6 +31,26 @@
     <title>Document</title>
 </head>
 <body>
+    <form action="" method="post">
+    <select name="menu" id="menu">
+        <option value=""></option>
+        <option value="ver">Ver dados</option>
+        <option value="checar">Checar dados</option>
+        <fieldset>
+            <input type="submit" name="ok" id="ok" value="ok" >
+        </fieldset>
+    </select>
+    <?php
+        if ($menu == "ver"){
+            header('Location: verJson.php');
+            exit;
+        }else if ($menu == "checar"){
+            header('Location: checar.php');
+            exit;
+        }else{
+            
+        }
+    ?>
     <form action="" method="post">
     <fieldset>
     <legend>Informe o nome do arquivo</legend>
@@ -82,20 +102,7 @@
         $menu = (isset($_POST['menu']) ? $_POST['menu'] : "");
         
     ?>
-    <form action="" method="post">
-    <select name="menu" id="menu">
-        <option value=""></option>
-        <option value="ver">Ver dados</option>
-        <fieldset>
-            <input type="submit" name="ok" id="ok" value="ok" >
-        </fieldset>
-    </select>
-    <?php
-        if ($menu == "ver"){
-            header('Location: verJson.php');
-            exit;
-        }
-    ?>
+    
         
         
 
